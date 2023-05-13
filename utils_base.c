@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_ps.c                                         :+:      :+:    :+:   */
+/*   utils_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 22:45:53 by melayoub          #+#    #+#             */
-/*   Updated: 2023/04/02 02:28:40 by melayoub         ###   ########.fr       */
+/*   Created: 2023/05/11 23:39:50 by melayoub          #+#    #+#             */
+/*   Updated: 2023/05/13 15:51:28 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
 
 size_t	ft_strlen(char *str)
 {
@@ -22,38 +28,32 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_error()
-{
-	write(2, "ERROR\n", 6);
-	exit(1);
-}
-
 long	ft_atoi(const char *str)
 {
-	int	i;
+	int		i;
 	long	res;
-	int	sign;
+	int		sign;
 
 	sign = 1;
 	res = 0;
 	i = 0;
-
 	while (str[i] == ' ')
 		i++;
-	if (str[i] == '+' || str[i] == '-') 
+	if (str[i] == '+' || str[i] == '-')
 	{
-		if(str[i] == '-')
+		if (str[i] == '-')
 			sign *= -1;
-		i++;
+		if ((str[i + 1] >= '0' && str[i + 1] <= '9'))
+			i++;
+		else
+			ft_error();
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - '0';
 		i++;
 	}
-	if (res * sign > 2147483647 || res * sign < -2147483648)
-		return (0);
-return (res * sign);
+	return (res * sign);
 }
 
 char	*ft_strdup(char *src)
@@ -79,10 +79,10 @@ char	*ft_strjoin(char *str1, char *str2)
 	int		j;
 	char	*str;
 
-	if (!str2 && !str1)
-		return (NULL);
-	if (!str1)
+	if (!str1 && str2)
 		return (ft_strdup(str2));
+	if (!str2 || !str1 || !*str2)
+		ft_error();
 	len_s1 = ft_strlen(str1);
 	len_s2 = ft_strlen(str2);
 	i = 0;

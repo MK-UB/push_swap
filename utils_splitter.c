@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 22:45:35 by melayoub          #+#    #+#             */
-/*   Updated: 2023/03/31 17:06:08 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:55:42 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,14 @@ char	**ft_split(char *s, char c)
 	}
 	*(str + i) = NULL;
 	return (str);
+}
+
+int	str_tab_len(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

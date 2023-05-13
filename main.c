@@ -6,79 +6,68 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 02:47:44 by melayoub          #+#    #+#             */
-/*   Updated: 2023/04/16 02:54:07 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:24:46 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-	void ft_indexer(t_list *content)
-	{
-		t_list *temp;
-		t_list *temper;
-		temp = content;
-		while (temp)
-		{
-			temper = content;
-			while (temper)
-			{
-				if (temper->value > temp->value)
-					temper->index++;
-				temper = temper->next;
-			}
-			temp = temp->next;
-		}
-	}
+void	ft_indexer(t_list *content)
+{
+	t_list	*temp;
+	t_list	*temper;
 
+	temp = content;
+	while (temp)
+	{
+		temper = content;
+		while (temper)
+		{
+			if (temper->data > temp->data)
+				temper->index++;
+			temper = temper->next;
+		}
+		temp = temp->next;
+	}
+}
+void fun()
+{
+	system("leaks push_swap");
+}
 int	main(int ac, char **av)
 {
-	p_list content;
-	t_list *stack_a;
-	// t_list *stack_b;
-	int i;
+	t_plist	content;
+	char	**splt;
+	int		i;
 
-	i = ac - 1;
-	printf("ele: %d\n", content.elements);
-	stack_a = NULL;
-	ft_splitter(&content, ac, av);
-	while(i > 0)
+	if (ac == 1)
+		exit(0);
+	content.stack_a = NULL;
+	content.stack_b = NULL;
+	atexit(fun);
+	splt = ft_splitter(&content, ac, av);
+	ft_sortcheck(splt);
+	i = str_tab_len(splt) - 1;
+	while (i >= 0)
+		ft_new_node(&content.stack_a, ft_lstnew(ft_atoi(splt[i--])));
+	i = 0;
+	while (splt[i])
+		free(splt[i++]);
+	free(splt);
+	content.elements = ft_lst_size(content.stack_a);
+	ft_indexer(content.stack_a);
+	if (content.elements >= 2 && content.elements <= 3)
+		sort_three(&content.stack_a);
+	else if (content.elements >= 4 && content.elements <= 5)
+		sort_five(&content.stack_a, &content.stack_b);
+	else if (content.elements >= 6 && content.elements <= 100)
+		sort_hundred(&content.stack_a, &content.stack_b);
+	else if (content.elements > 100)
+		sort_five_hundred(&content.stack_a, &content.stack_b);
+	while (content.stack_a)
 	{
-		ft_new_node(&stack_a, ft_lstnew(ft_atoi(av[i])));
-		i--;
+		free(content.stack_a);
+		content.stack_a = content.stack_a->next;
 	}
-	ft_indexer(stack_a);
-
-	t_list *h = stack_a;
-	while (h)
-	{
-		printf("value = %ld || index = %d\n", h->value, h->index);
-		h = h->next;
-	}
-	puts("------------------------");
-	ft_rra(&stack_a, 1);
-	h = stack_a;
-	while (h)
-	{
-		printf("value = %ld || index = %d\n", h->value, h->index);
-		h = h->next;
-	}
-	puts("------------------------");
-	// ft_ra(&head);
-	// while (head)
-	// {
-	// 	printf("value = %ld || index = %d\n", head->value, head->index);
-	// 	head = head->next;
-	// }
-	// printf("after sa: %s\n", av[1]);
-	// iter = head;
-	// while (iter)
-	// {
-	// 	printf("the value %ld and the index %d\n", iter->value, iter->index);
-	// 		iter = iter->next;
-	// }
-	// ft_indexer(av, content.elements);
-	// while(content.elements)
-	// printf("av1: %s", av[1]);
-	return (0);	
-
+	return (0);
 }

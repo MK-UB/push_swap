@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 00:11:56 by melayoub          #+#    #+#             */
-/*   Updated: 2023/04/15 22:36:17 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:58:34 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(int c)
 	ptr = malloc(sizeof(t_list));
 	if (ptr != NULL)
 	{
-		ptr->value = c;
+		ptr->data = c;
 		ptr->next = NULL;
 		ptr->index = 0;
 	}
@@ -61,29 +61,19 @@ t_list	*ft_lstblast(t_list *lst)
 	return (0);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_lst_size(t_list *lst)
 {
-	t_list	*last;
+	int		count;
+	t_list	*tmp;
 
-	if (!*lst)
+	if (!lst)
+		return (-1);
+	count = 0;
+	tmp = lst;
+	while (tmp)
 	{
-		*lst = new;
-		return ;
+		count++;
+		tmp = tmp->next;
 	}
-	last = ft_lstlast(*lst);
-	last->next = new;
+	return (count);
 }
-
-// void	ft_indexer(char **av, int elements)
-// {
-// 	int i;
-// 	int x;
-
-// 	i = 0;
-// 	x = 0
-// 	while (i <= elements)
-// 	{
-// 		if (av[i] < av[j])
-
-// 	}
-// }
