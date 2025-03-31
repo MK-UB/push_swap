@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 21:40:21 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 16:58:36 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:39:23 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -63,9 +64,13 @@ t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstblast(t_list *lst);
 int					ft_lst_size(t_list *lst);
 int					str_tab_len(char **str);
+char				*ft_strtrim(char *s1, char *set);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 char				*get_next_line(int fd);
 int					str_tab_len(char **str);
+void				ft_lst_clear(t_list **lst);
+int					ft_strcmp(char *s1, char *s2);
+int					ft_check_node(t_list *a);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3

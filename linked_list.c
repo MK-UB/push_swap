@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 00:11:56 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 16:58:34 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:05:20 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_list	*ft_lstlast(t_list *lst)
 		return (NULL);
 	while (lst)
 	{
-		if (lst->next == '\0')
+		if (lst->next == NULL)
 			return (lst);
 		lst = lst->next;
 	}
@@ -54,7 +54,7 @@ t_list	*ft_lstblast(t_list *lst)
 		return (NULL);
 	while (lst)
 	{
-		if (lst->next->next == '\0')
+		if (lst->next->next == NULL)
 			return (lst);
 		lst = lst->next;
 	}

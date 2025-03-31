@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:36:23 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 15:53:52 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:08:53 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	ft_checker(char **av, int elements)
 		i = 0;
 		while (av[j][i])
 		{
-			if ((av[j][i] == '-' || av[j][i] == '+') && (i != 0 && av[j][i - 1]))
+			if ((av[j][i] == '-' || av[j][i] == '+')
+			&& (i != 0 && av[j][i - 1]))
 				ft_error();
 			if ((av[j][i] >= '0' && av[j][i] <= '9')
 			|| av[j][i] == '-' || av[j][i] == '+' || av[j][i] == ' '
@@ -69,7 +70,7 @@ void	ft_sortcheck(char **av)
 		while (ft_atoi(av[j]) < ft_atoi(av[j + 1]))
 		{
 			j++;
-			if (av[j + 1] == '\0')
+			if (av[j + 1] == NULL)
 				exit(0);
 		}
 	}

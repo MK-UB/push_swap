@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 02:47:44 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 17:24:46 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:24:06 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,32 @@ void	ft_indexer(t_list *content)
 		temp = temp->next;
 	}
 }
-void fun()
+
+void	ft_setup(t_plist *content, int ac, char **av)
 {
-	system("leaks push_swap");
-}
-int	main(int ac, char **av)
-{
-	t_plist	content;
 	char	**splt;
 	int		i;
 
-	if (ac == 1)
-		exit(0);
-	content.stack_a = NULL;
-	content.stack_b = NULL;
-	atexit(fun);
-	splt = ft_splitter(&content, ac, av);
+	content->stack_a = NULL;
+	content->stack_b = NULL;
+	splt = ft_splitter(content, ac, av);
 	ft_sortcheck(splt);
 	i = str_tab_len(splt) - 1;
 	while (i >= 0)
-		ft_new_node(&content.stack_a, ft_lstnew(ft_atoi(splt[i--])));
+		ft_new_node(&content->stack_a, ft_lstnew(ft_atoi(splt[i--])));
 	i = 0;
 	while (splt[i])
 		free(splt[i++]);
 	free(splt);
+}
+
+int	main(int ac, char **av)
+{
+	t_plist	content;
+
+	if (ac == 1)
+		exit(0);
+	ft_setup(&content, ac, av);
 	content.elements = ft_lst_size(content.stack_a);
 	ft_indexer(content.stack_a);
 	if (content.elements >= 2 && content.elements <= 3)

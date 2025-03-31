@@ -6,39 +6,11 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:56:29 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 17:27:24 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:37:37 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-void	ft_lst_clear(t_list **lst)
-{
-	t_list	*next_lst;
-	t_list	*current_lst;
-
-	if (!lst)
-		return ;
-	next_lst = *lst;
-	while (next_lst)
-	{
-		current_lst = next_lst;
-		next_lst = next_lst->next;
-		free(current_lst);
-	}
-	*lst = NULL;
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
 
 void	do_instructions(t_list **stack_a, t_list **stack_b, char *s)
 {
@@ -68,39 +40,29 @@ void	do_instructions(t_list **stack_a, t_list **stack_b, char *s)
 		return (write(1, "Error\n", 6), exit(1));
 }
 
-int	ft_check_node(t_list *a)
+void	ft_setup(t_plist *content, int ac, char **av)
 {
-	t_list	*head;
-
-	head = a;
-	while (head && head->next)
-	{
-		if (head->data > head->next->data)
-			return (1);
-		head = head->next;
-	}
-	return (0);
-}
-
-void fun()
-{
-	system("leaks checker");
-}
-
-int	main(int ac, char *av[])
-{
-	t_plist	content;
 	char	**splt;
-	char	*s;
 	int		i;
 
-	if (ac == 1)
-		exit (0);
-	atexit(fun);
-	splt = ft_splitter (&content, ac, av);
+	splt = ft_splitter(content, ac, av);
 	i = str_tab_len(splt) - 1;
 	while (i >= 0)
-		ft_new_node(&content.stack_a, ft_lstnew(ft_atoi(splt[i--])));
+		ft_new_node(&content->stack_a, ft_lstnew(ft_atoi(splt[i--])));
+	i = 0;
+	while (splt[i])
+		free(splt[i++]);
+	free(splt);
+}
+
+int	main(int ac, char **av)
+{
+	t_plist	content;
+	char	*s;
+
+	if (ac == 1)
+		exit(0);
+	ft_setup(&content, ac, av);
 	s = get_next_line(0);
 	while (s)
 	{

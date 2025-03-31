@@ -6,7 +6,7 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 22:45:35 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 11:55:42 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:05:37 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_all(char **str)
 	i = 0;
 	if (!str[i])
 	{
-		while (str[i] != '\0')
+		while (str[i] != NULL)
 		{
 			free(str[i]);
 			i++;

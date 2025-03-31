@@ -6,12 +6,11 @@
 /*   By: melayoub <melayoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 23:21:49 by melayoub          #+#    #+#             */
-/*   Updated: 2023/05/13 17:18:31 by melayoub         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:31:46 by melayoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "limits.h"
 
 int	ft_counter(char *av)
 {
@@ -31,63 +30,22 @@ int	ft_counter(char *av)
 	return (elements);
 }
 
-char	*ft_strchr(const char *s, int c)
+void	max_handler(char **str)
 {
-	int	i;
+	int	a;
 
-	i = 0;
-	while (s[i] != '\0')
+	a = 0;
+	while (str[a])
 	{
-		if (s[i] == (char)c)
-			return ((char *) s + i);
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *) s + i);
-	return (0);
-}
-
-char	*ft_strrchr(const char *s, int c)
-{
-	int	len;
-
-	len = ft_strlen((char *)s);
-	while (len >= 0)
-	{		
-		if (s[len] == (char)c)
-			return ((char *)s + len);
-	len--;
-	}
-	return (NULL);
-}
-
-char	*ft_strtrim(char *s1, char *set)
-{
-	int	len;
-
-	if (!s1 || !set)
-		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	len = ft_strlen((char *)s1);
-	while (len && ft_strrchr(set, s1[len]))
-		len--;
-	return (ft_substr(s1, 0, len + 1));
-}
-void max_handler(char **str)
-{
-	int a = 0;
-	while(str[a])
-	{
-		if(ft_strlen(str[a]) > ft_strlen("+2147483647"))
+		if (ft_strlen(str[a]) > ft_strlen("+2147483647"))
 		{
-			write(1, "Error\n", 7);
-			exit(0);
+			write (1, "Error\n", 7);
+			exit (0);
 		}
-		else if(ft_atoi(str[a]) > INT_MAX || ft_atoi(str[a]) < INT_MIN)
+		else if (ft_atoi(str[a]) > INT_MAX || ft_atoi(str[a]) < INT_MIN)
 		{
-			write(1, "Error\n", 7);
-			exit(0);
+			write (1, "Error\n", 7);
+			exit (0);
 		}
 		a++;
 	}
@@ -105,7 +63,6 @@ char	**ft_splitter(t_plist *content, int ac, char **av)
 	while (x != ac)
 	{
 		ss = ft_strtrim(av[x], " ");
-		// printf("-----[%s]  [%p]\n", ss, ss);
 		str = ft_strjoin(str, ss);
 		free(ss);
 		if (!*str)
